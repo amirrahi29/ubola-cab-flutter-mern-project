@@ -1,0 +1,65 @@
+{
+  "name": "@coreui/coreui-free-react-admin-template",
+  "version": "4.5.0",
+  "description": "CoreUI Free React Admin Template",
+  "homepage": ".",
+  "bugs": {
+    "url": "https://github.com/coreui/coreui-free-react-admin-template/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:coreui/coreui-free-react-admin-template.git"
+  },
+  "license": "MIT",
+  "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
+  "scripts": {
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "start": "react-scripts start",
+    "test": "react-scripts test",
+    "test:cov": "npm test -- --coverage --watchAll=false",
+    "test:debug": "react-scripts --inspect-brk test --runInBand",
+    "lint": "eslint --fix ."
+  },
+  "dependencies": {
+    "@coreui/chartjs": "^3.1.1",
+    "@coreui/coreui": "^4.2.6",
+    "@coreui/icons": "^3.0.1",
+    "@coreui/icons-react": "^2.1.0",
+    "@coreui/react": "^4.6.0",
+    "@coreui/react-chartjs": "^2.1.2",
+    "@coreui/utils": "^2.0.1",
+    "axios": "^1.4.0",
+    "chart.js": "^3.9.1",
+    "classnames": "^2.3.2",
+    "core-js": "^3.29.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-app-polyfill": "^3.0.0",
+    "react-data-table-component": "^7.5.3",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.8.2",
+    "redux": "4.2.1",
+    "simplebar-react": "^2.4.3",
+    "styled-components": "^6.0.0-rc.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.15.4",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "prettier": "2.8.4",
+    "react-scripts": "5.0.1",
+    "sass": "^1.58.3",
+    "web-vitals": "^3.1.1"
+  },
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6"
+  }
+}
