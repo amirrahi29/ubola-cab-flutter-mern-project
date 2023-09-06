@@ -4,6 +4,7 @@ import 'package:user_app/Config/AllDimensions.dart';
 import 'package:user_app/Config/AllImages.dart';
 import 'package:user_app/Config/AllTitles.dart';
 import 'package:user_app/Config/Allcolors.dart';
+import 'package:user_app/Config/Notification/MyCustomNotification.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -13,6 +14,14 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    MyCustomNotification.requestNotificationPermissions(context);
+  }
+
   @override
   Widget build(BuildContext context) {
 

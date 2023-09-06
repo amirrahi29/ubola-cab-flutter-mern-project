@@ -1,9 +1,8 @@
 import 'package:driver_app/Config/AllDimensions.dart';
 import 'package:driver_app/Config/AllTitles.dart';
 import 'package:driver_app/Config/Allcolors.dart';
+import 'package:driver_app/Config/Notification/MyCustomNotification.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 import '../Config/AllImages.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,6 +13,14 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    MyCustomNotification.requestNotificationPermissions(context);
+  }
+
   @override
   Widget build(BuildContext context) {
 

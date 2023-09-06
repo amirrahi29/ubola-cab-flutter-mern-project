@@ -16,9 +16,13 @@ mongoose.connection.on('error',()=>{
     console.log('Mongoose connection failed '+error);
 });
 
-//routes
+//user route
 const userRoute = require('./route/UserRoute');
 app.use('/api',userRoute);
+
+//notification route
+const notifyRoute = require('./route/NotificationRoute');
+app.use('/api',notifyRoute);
 
 //server
 app.listen(process.env.PORT,()=>{
