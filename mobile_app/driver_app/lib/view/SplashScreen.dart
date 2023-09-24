@@ -1,9 +1,10 @@
 import 'package:driver_app/Config/AllDimensions.dart';
 import 'package:driver_app/Config/AllTitles.dart';
 import 'package:driver_app/Config/Allcolors.dart';
-import 'package:driver_app/Config/Notification/MyCustomNotification.dart';
+import 'package:driver_app/view_model/SplashViewModel.dart';
 import 'package:flutter/material.dart';
 import '../Config/AllImages.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,11 +15,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+  final splashViewModel = Get.put(SplashViewModel());
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    MyCustomNotification.requestNotificationPermissions(context);
+    splashViewModel.checkPermission(context);
   }
 
   @override

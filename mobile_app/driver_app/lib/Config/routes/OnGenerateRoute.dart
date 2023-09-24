@@ -1,3 +1,5 @@
+import 'package:driver_app/view/AuthScreens/AuthPage.dart';
+import 'package:driver_app/view/AuthScreens/OTPPage.dart';
 import 'package:driver_app/view/ErrorScreen.dart';
 import 'package:driver_app/view/HomeScreen.dart';
 import 'package:driver_app/view/SplashScreen.dart';
@@ -19,6 +21,14 @@ class OnGenerateRoute{
       case PageConstants.homeScreen:
         {
           return materialPageRoute(widget: HomeScreen());
+        }
+      case PageConstants.authScreen:
+        {
+          return materialPageRoute(widget: AuthPage());
+        }
+      case PageConstants.otpScreen:
+        {
+          return materialPageRoute(widget: OTPPage());
         }
       default:
         {

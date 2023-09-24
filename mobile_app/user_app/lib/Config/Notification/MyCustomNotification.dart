@@ -2,8 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
   'high_importance_channel', // id
@@ -21,6 +19,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 class MyCustomNotification {
+
   static getFirebaseMesagingInBackground() async {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
@@ -89,24 +88,4 @@ class MyCustomNotification {
     return token!;
   }
 
-  static Future<void> requestNotificationPermissions(BuildContext context) async {
-    final PermissionStatus status = await Permission.notification.request();
-    if (status.isGranted) {
-      // Notification permissions granted
-      getFcmToken();
-      getFirebaseMesagingInBackground();
-      getFirebaseMesagingInForeground(context);
-    } else if (status.isDenied) {
-      Fluttertoast.showToast(
-          msg:
-          "Notification permission denied, Please enable notification permission to get notifications");
-      // Notification permissions denied
-    } else if (status.isPermanentlyDenied) {
-      Fluttertoast.showToast(
-          msg:
-          "Notification permission denied, Please enable notification permission to get notifications");
-      // Notification permissions permanently denied, open app settings
-      await openAppSettings();
-    }
-  }
 }

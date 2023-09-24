@@ -88,25 +88,4 @@ class MyCustomNotification {
     print('myToken: $token');
     return token!;
   }
-
-  static Future<void> requestNotificationPermissions(BuildContext context) async {
-    final PermissionStatus status = await Permission.notification.request();
-    if (status.isGranted) {
-      // Notification permissions granted
-      getFcmToken();
-      getFirebaseMesagingInBackground();
-      getFirebaseMesagingInForeground(context);
-    } else if (status.isDenied) {
-      Fluttertoast.showToast(
-          msg:
-          "Notification permission denied, Please enable notification permission to get notifications");
-      // Notification permissions denied
-    } else if (status.isPermanentlyDenied) {
-      Fluttertoast.showToast(
-          msg:
-          "Notification permission denied, Please enable notification permission to get notifications");
-      // Notification permissions permanently denied, open app settings
-      await openAppSettings();
-    }
-  }
 }

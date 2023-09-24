@@ -40,6 +40,10 @@ dependencies:
   flutter_local_notifications:
   fluttertoast:
   permission_handler:
+  geocoding: ^2.1.0
+  geolocator: ^10.1.0
+  get:
+  pin_code_fields: ^8.0.1
 
 dev_dependencies:
   flutter_test:
