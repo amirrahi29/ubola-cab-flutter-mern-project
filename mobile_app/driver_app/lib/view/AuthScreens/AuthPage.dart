@@ -2,7 +2,10 @@ import 'package:driver_app/Config/AllDimensions.dart';
 import 'package:driver_app/Config/AllImages.dart';
 import 'package:driver_app/Config/Allcolors.dart';
 import 'package:driver_app/Config/routes/PageConstants.dart';
+import 'package:driver_app/view_model/AuthViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -12,6 +15,21 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
+
+  final _authViewModel = Get.put(AuthViewModel());
+  final _phoneNumberController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration(seconds: 1),(){
+      if(_authViewModel.originalList.isNotEmpty){
+        phoneNumberAutoPickerPopUp(context);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -69,6 +87,7 @@ class _AuthPageState extends State<AuthPage> {
                                     child: Container(
                                       margin: EdgeInsets.only(left: AllDimensions.eigth,right: AllDimensions.eigth,),
                                       child: TextField(
+                                        controller: _phoneNumberController,
                                         keyboardType: TextInputType.number,
                                         style: TextStyle(fontSize: AllDimensions.sixteen,fontWeight: FontWeight.bold),
                                         cursorColor: Allcolors.blackColor,
@@ -113,5 +132,87 @@ class _AuthPageState extends State<AuthPage> {
           ),
         )
     );
+  }
+  void phoneNumberAutoPickerPopUp(BuildContext context){
+
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context){
+          return Scaffold(
+            backgroundColor: Allcolors.transparentColor,
+            body: InkWell(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Container(
+                alignment: Alignment.center,
+                child: SingleChildScrollView(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.only(left: AllDimensions.sixteen,right: AllDimensions.sixteen),
+                    padding: EdgeInsets.only(left: AllDimensions.eigth,right: AllDimensions.eigth),
+                    decoration: BoxDecoration(
+                      color: Allcolors.whiteColor
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+
+                        Container(
+                          margin: EdgeInsets.all(AllDimensions.eigth),
+                          padding: EdgeInsets.only(left: AllDimensions.twelve,right: AllDimensions.twelve),
+                          child: Text("SignIn with",
+                            style: TextStyle(fontSize: AllDimensions.twenty,fontWeight: FontWeight.bold,
+                                color: Allcolors.greyColor),),
+                        ),
+
+                        SizedBox(height: AllDimensions.eigth,),
+
+                        for(int i = 0; i<_authViewModel.originalList.length; i++)
+                          InkWell(
+                            onTap: (){
+                              _phoneNumberController.text = _authViewModel.originalList[i];
+                              Navigator.pop(context);
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+
+                                Container(
+                                  margin: EdgeInsets.all(AllDimensions.eigth),
+                                  padding: EdgeInsets.all(AllDimensions.twelve),
+                                  child: Text(_authViewModel.originalList[i],
+                                    style: TextStyle(fontSize: AllDimensions.sixteen),),
+                                ),
+                                i == _authViewModel.originalList.length - 1?SizedBox.shrink():Divider()
+
+                              ],
+                            ),
+                          ),
+
+                        InkWell(
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(AllDimensions.eigth),
+                            padding: EdgeInsets.only(left: AllDimensions.twelve,right: AllDimensions.twelve),
+                            child: Text("None of the above",
+                            style: TextStyle(fontSize: AllDimensions.twenty,fontWeight: FontWeight.bold,
+                            color: Allcolors.blueColor),),
+                          ),
+                        )
+
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+    );
+
   }
 }

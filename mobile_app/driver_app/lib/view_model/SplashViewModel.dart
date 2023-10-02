@@ -13,13 +13,15 @@ class SplashViewModel extends GetxController{
     Map<Permission, PermissionStatus> status = await [
       Permission.notification,
       Permission.camera,
-      Permission.storage,
+      Permission.phone,
+      // Permission.storage,
       Permission.location,
     ].request();
 
     if(await Permission.notification.request().isGranted &&
         await Permission.camera.request().isGranted &&
-        await Permission.storage.request().isGranted &&
+        await Permission.phone.request().isGranted &&
+        // await Permission.storage.request().isGranted &&
         await Permission.location.request().isGranted
     ){
 

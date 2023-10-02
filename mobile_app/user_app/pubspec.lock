@@ -400,6 +400,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.6"
+  simnumber:
+    dependency: "direct main"
+    description:
+      name: simnumber
+      sha256: "0ab8db0e5f5cd97cb102d47285cb76c3c12989e35a4ef18e37ace25743a9fde1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.12"
   sky_engine:
     dependency: transitive
     description: flutter
