@@ -4,6 +4,8 @@ import 'package:user_app/view/AuthScreens/AuthPage.dart';
 import 'package:user_app/view/AuthScreens/OTPPage.dart';
 import 'package:user_app/view/ErrorScreen.dart';
 import 'package:user_app/view/HomeScreen.dart';
+import 'package:user_app/view/Location/DrawRoutesScreen.dart';
+import 'package:user_app/view/Location/SearchLocation.dart';
 import 'package:user_app/view/SplashScreen.dart';
 
 class OnGenerateRoute{
@@ -28,6 +30,14 @@ class OnGenerateRoute{
       case PageConstants.otpScreen:
         {
           return materialPageRoute(widget: OTPPage());
+        }
+      case PageConstants.locationSearchScreen:
+        {
+          return materialPageRoute(widget: SearchLocation());
+        }
+      case PageConstants.drawRouteScreen:
+        {
+          return materialPageRoute(widget: DrawRoutesScreen());
         }
       default:
         {

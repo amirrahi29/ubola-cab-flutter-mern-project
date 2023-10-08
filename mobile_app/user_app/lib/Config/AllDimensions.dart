@@ -5,13 +5,17 @@ class AllDimensions{
   static const double two = 2;
   static const double eigth = 8;
   static const double twelve = 12;
+  static const double fourteen = 14;
   static const double sixteen = 16;
   static const double seventeen = 17;
   static const double eighteen = 18;
   static const double twenty = 20;
   static const double twentyFour = 24;
+  static const double thirty = 30;
   static const double thirtyTwo = 32;
   static const double fifty = 50;
+  static const double fourty = 40;
+  static const double seventy = 70;
   static const double twoHundred = 200;
 
 }

@@ -6,6 +6,7 @@ import 'package:user_app/Config/AllDimensions.dart';
 import 'package:user_app/Config/AllImages.dart';
 import 'package:user_app/Config/AllTitles.dart';
 import 'package:user_app/Config/Allcolors.dart';
+import 'package:user_app/Config/routes/PageConstants.dart';
 
 class OTPPage extends StatefulWidget {
   const OTPPage({Key? key}) : super(key: key);
@@ -92,15 +93,20 @@ class _OTPPageState extends State<OTPPage> {
                               }, appContext: context,
                             ),
 
-                            Container(
-                              padding: EdgeInsets.only(left: AllDimensions.sixteen,right: AllDimensions.sixteen,
-                                  top: AllDimensions.twelve,bottom: AllDimensions.twelve),
-                              decoration: BoxDecoration(
-                                  color: Allcolors.blackColor,
-                                  borderRadius: BorderRadius.circular(AllDimensions.eigth)
+                            InkWell(
+                              onTap: (){
+                                Navigator.pushNamedAndRemoveUntil(context, PageConstants.homeScreen, (route) => false);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(left: AllDimensions.sixteen,right: AllDimensions.sixteen,
+                                    top: AllDimensions.twelve,bottom: AllDimensions.twelve),
+                                decoration: BoxDecoration(
+                                    color: Allcolors.blackColor,
+                                    borderRadius: BorderRadius.circular(AllDimensions.eigth)
+                                ),
+                                child: Text("Submit",style: TextStyle(
+                                    color: Allcolors.whiteColor),),
                               ),
-                              child: Text("Submit",style: TextStyle(
-                                  color: Allcolors.whiteColor),),
                             )
 
                           ],

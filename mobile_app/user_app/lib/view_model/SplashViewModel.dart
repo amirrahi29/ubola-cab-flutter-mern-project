@@ -9,6 +9,9 @@ import 'package:user_app/Config/routes/PageConstants.dart';
 
 class SplashViewModel extends GetxController{
 
+  var latitude = "".obs;
+  var longitude = "".obs;
+
   Future<void> checkPermission(BuildContext context)async{
     Map<Permission, PermissionStatus> status = await [
       Permission.notification,
@@ -41,6 +44,8 @@ class SplashViewModel extends GetxController{
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     if(position.latitude != 0 && position.longitude != 0){
       Utils.myLogs("Latitude: ${position.latitude}, Longitude: ${position.longitude}");
+      latitude.value = position.latitude.toString();
+      longitude.value = position.longitude.toString();
       _launchPage(context);
     }
     return await Geolocator.getCurrentPosition();
