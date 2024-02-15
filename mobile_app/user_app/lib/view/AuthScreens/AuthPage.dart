@@ -1,10 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:user_app/Config/AllDimensions.dart';
 import 'package:user_app/Config/AllImages.dart';
 import 'package:user_app/Config/Allcolors.dart';
 import 'package:user_app/Config/routes/PageConstants.dart';
-import 'package:get/get.dart';
+import 'package:user_app/model/LoginModel.dart';
 import 'package:user_app/view_model/AuthViewModel.dart';
 
 class AuthPage extends StatefulWidget {
@@ -18,6 +19,8 @@ class _AuthPageState extends State<AuthPage> {
 
   final _authViewModel = Get.put(AuthViewModel());
   final _phoneNumberController = TextEditingController();
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  String? verificationID = "";
 
   @override
   void initState() {
@@ -28,6 +31,42 @@ class _AuthPageState extends State<AuthPage> {
         phoneNumberAutoPickerPopUp(context);
       }
     });
+  }
+
+  _sendOTP()async{
+    try {
+      await FirebaseAuth.instance.verifyPhoneNumber(
+            phoneNumber: "+91${_phoneNumberController.text}",
+            verificationCompleted: (PhoneAuthCredential credential)async {
+              await _auth.signInWithCredential(credential);
+
+              // LoginModel loginModel = new LoginModel();
+              // loginModel.phoneNumber = _phoneNumberController.text;
+              // loginModel.verificationId = verificationID;
+              // //navigate
+              // Navigator.pushNamed(context, PageConstants.otpScreen,
+              // arguments: loginModel);
+            },
+            verificationFailed: (FirebaseAuthException e) {
+              print(e.message);
+            },
+            codeSent: (String verificationId, int? resendToken) {
+              verificationID = verificationId;
+
+              LoginModel loginModel = new LoginModel();
+              loginModel.phoneNumber = _phoneNumberController.text;
+              loginModel.verificationId = verificationID;
+              //navigate
+              Navigator.pushNamed(context, PageConstants.otpScreen,
+                  arguments: loginModel);
+            },
+            codeAutoRetrievalTimeout: (String verificationId) {
+              verificationID = verificationId;
+            },
+          );
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -108,7 +147,7 @@ class _AuthPageState extends State<AuthPage> {
 
                             InkWell(
                               onTap: (){
-                                Navigator.pushNamed(context, PageConstants.otpScreen);
+                                _sendOTP();
                               },
                               child: Container(
                                 padding: EdgeInsets.only(left: AllDimensions.sixteen,right: AllDimensions.sixteen,

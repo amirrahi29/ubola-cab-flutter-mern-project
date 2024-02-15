@@ -3,11 +3,16 @@ import 'package:driver_app/Config/AllDimensions.dart';
 import 'package:driver_app/Config/AllImages.dart';
 import 'package:driver_app/Config/AllTitles.dart';
 import 'package:driver_app/Config/Allcolors.dart';
+import 'package:driver_app/model/LoginModel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../Config/routes/PageConstants.dart';
+
 class OTPPage extends StatefulWidget {
-  const OTPPage({Key? key}) : super(key: key);
+  final LoginModel loginModel;
+  const OTPPage({Key? key,required this.loginModel}) : super(key: key);
 
   @override
   State<OTPPage> createState() => _OTPPageState();
@@ -15,8 +20,23 @@ class OTPPage extends StatefulWidget {
 
 class _OTPPageState extends State<OTPPage> {
 
+  FirebaseAuth _auth = FirebaseAuth.instance;
   final _otpTextEditingController = TextEditingController();
   StreamController<ErrorAnimationType> _errorController = StreamController<ErrorAnimationType>();
+
+  _verifyOTP()async{
+    try {
+      AuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: widget.loginModel.verificationId.toString(),
+          smsCode: _otpTextEditingController.text
+      );
+      await _auth.signInWithCredential(credential);
+      // Navigator.pushNamedAndRemoveUntil(context, PageConstants.homeScreen, (route) => false);
+      print("navigating to home screen");
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,15 +111,20 @@ class _OTPPageState extends State<OTPPage> {
                               }, appContext: context,
                             ),
 
-                            Container(
-                              padding: EdgeInsets.only(left: AllDimensions.sixteen,right: AllDimensions.sixteen,
-                                  top: AllDimensions.twelve,bottom: AllDimensions.twelve),
-                              decoration: BoxDecoration(
-                                  color: Allcolors.blackColor,
-                                  borderRadius: BorderRadius.circular(AllDimensions.eigth)
+                            InkWell(
+                              onTap: (){
+                                _verifyOTP();
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(left: AllDimensions.sixteen,right: AllDimensions.sixteen,
+                                    top: AllDimensions.twelve,bottom: AllDimensions.twelve),
+                                decoration: BoxDecoration(
+                                    color: Allcolors.blackColor,
+                                    borderRadius: BorderRadius.circular(AllDimensions.eigth)
+                                ),
+                                child: Text("Submit",style: TextStyle(
+                                    color: Allcolors.whiteColor),),
                               ),
-                              child: Text("Submit",style: TextStyle(
-                                  color: Allcolors.whiteColor),),
                             )
 
                           ],

@@ -45,6 +45,7 @@ dependencies:
   get:
   pin_code_fields: ^8.0.1
   simnumber: ^0.0.12
+  firebase_auth:
 
 dev_dependencies:
   flutter_test:

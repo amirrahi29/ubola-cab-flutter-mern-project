@@ -1,5 +1,5 @@
 class Confidential{
 
-  static String googleMapApiKey = "API_KEY";
+  static String googleMapApiKey = "AIzaSyC5Gix7m4skHPHQ246fMHf101IozcoA0cE";
 
 }

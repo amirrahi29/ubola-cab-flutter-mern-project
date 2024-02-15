@@ -48,6 +48,8 @@ dependencies:
   google_maps_flutter:
   google_place:
   flutter_polyline_points:
+  firebase_auth:
+
 
 dev_dependencies:
   flutter_test:

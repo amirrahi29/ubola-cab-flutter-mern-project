@@ -149,7 +149,7 @@ class _SearchLocationState extends State<SearchLocation> {
                               });
                             }
                             if(_startPosition != null && _endPosition != null && mounted){
-                              print("start position: ${_startPosition!.name}");
+                              print("start position: ${_startPosition!.geometry!.location!.lat}");
                               print("end position: ${_endPosition!.name}");
                             }
                           },

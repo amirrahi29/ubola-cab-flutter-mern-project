@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:user_app/Config/routes/PageConstants.dart';
+import 'package:user_app/model/LoginModel.dart';
 import 'package:user_app/view/AuthScreens/AuthPage.dart';
 import 'package:user_app/view/AuthScreens/OTPPage.dart';
 import 'package:user_app/view/ErrorScreen.dart';
@@ -29,7 +30,11 @@ class OnGenerateRoute{
         }
       case PageConstants.otpScreen:
         {
-          return materialPageRoute(widget: OTPPage());
+          if(args is LoginModel){
+            return materialPageRoute(widget: OTPPage(loginModel: args,));
+          }else{
+            return materialPageRoute(widget: ErrorScreen());
+          }
         }
       case PageConstants.locationSearchScreen:
         {

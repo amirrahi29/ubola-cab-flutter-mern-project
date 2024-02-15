@@ -1,3 +1,4 @@
+import 'package:driver_app/model/LoginModel.dart';
 import 'package:driver_app/view/AuthScreens/AuthPage.dart';
 import 'package:driver_app/view/AuthScreens/OTPPage.dart';
 import 'package:driver_app/view/ErrorScreen.dart';
@@ -28,7 +29,11 @@ class OnGenerateRoute{
         }
       case PageConstants.otpScreen:
         {
-          return materialPageRoute(widget: OTPPage());
+         if(args is LoginModel){
+           return materialPageRoute(widget: OTPPage(loginModel: args,));
+         }else{
+           return materialPageRoute(widget: ErrorScreen());
+         }
         }
       default:
         {

@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:user_app/Config/AllDimensions.dart';
@@ -7,9 +7,12 @@ import 'package:user_app/Config/AllImages.dart';
 import 'package:user_app/Config/AllTitles.dart';
 import 'package:user_app/Config/Allcolors.dart';
 import 'package:user_app/Config/routes/PageConstants.dart';
+import 'package:user_app/model/LoginModel.dart';
 
 class OTPPage extends StatefulWidget {
-  const OTPPage({Key? key}) : super(key: key);
+
+  final LoginModel loginModel;
+  const OTPPage({Key? key,required this.loginModel}) : super(key: key);
 
   @override
   State<OTPPage> createState() => _OTPPageState();
@@ -17,8 +20,22 @@ class OTPPage extends StatefulWidget {
 
 class _OTPPageState extends State<OTPPage> {
 
+  FirebaseAuth _auth = FirebaseAuth.instance;
   final _otpTextEditingController = TextEditingController();
   StreamController<ErrorAnimationType> _errorController = StreamController<ErrorAnimationType>();
+
+  _verifyOTP()async{
+    try {
+      AuthCredential credential = PhoneAuthProvider.credential(
+              verificationId: widget.loginModel.verificationId.toString(),
+              smsCode: _otpTextEditingController.text
+          );
+      await _auth.signInWithCredential(credential);
+      Navigator.pushNamedAndRemoveUntil(context, PageConstants.homeScreen, (route) => false);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +112,7 @@ class _OTPPageState extends State<OTPPage> {
 
                             InkWell(
                               onTap: (){
-                                Navigator.pushNamedAndRemoveUntil(context, PageConstants.homeScreen, (route) => false);
+                                _verifyOTP();
                               },
                               child: Container(
                                 padding: EdgeInsets.only(left: AllDimensions.sixteen,right: AllDimensions.sixteen,
