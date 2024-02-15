@@ -1,2 +1,0 @@
-password: amir@9575811347
-keyalias: key0
